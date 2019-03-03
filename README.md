@@ -1,6 +1,8 @@
 # zhban
 lightweight http proxy
 
+[![Build Status](https://travis-ci.com/poloten4ik100/zhban.svg?branch=master)](https://travis-ci.com/poloten4ik100/zhban)
+
 * Support http 1.1
 * Optional proxy Headers
 * Automatic optional modification of response content encoding to utf8
