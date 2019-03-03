@@ -2,6 +2,7 @@
 lightweight http proxy
 
 [![Build Status](https://travis-ci.com/poloten4ik100/zhban.svg?branch=master)](https://travis-ci.com/poloten4ik100/zhban)
+[![Coverage Status](https://coveralls.io/repos/github/poloten4ik100/zhban/badge.svg?branch=master)](https://coveralls.io/github/poloten4ik100/zhban?branch=master)
 
 * Support http 1.1
 * Optional proxy Headers
