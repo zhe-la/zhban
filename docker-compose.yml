@@ -1,0 +1,8 @@
+﻿version: '3'
+services:
+    gozhban:
+      build: .
+      hostname: gozhban
+      restart: always
+      ports:
+        - 3000:3000
