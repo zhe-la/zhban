@@ -1,7 +1,42 @@
 # zhban
-lightweight http proxy with browser random header UA
+lightweight http proxy
 
-### Build
+* Support http 1.1
+* Optional proxy Headers
+* Automatic optional modification of response content encoding to utf8
+* Embedded browser headers with random User-Agent to remote host
+* key protected
+
+## How it works
+
+```
+   +------+                                 +-----+               +-----------+
+   |client|                                 |proxy|               |destination|
+   +------+                                 +-----+               +-----------+
+                     --Req-->       
+             HTTP req. with POST data
+           url=http://ya.ru&key=qwqerty123             --Req-->
+                                                       <--Res--
+                     <--Res--
+```
+
+client send HTTP request with POST data:
+
+```
+url=http://ya.ru
+```
+
+**url** - address of the requested resource
+
+**key** (optional) - The key that will be checked for each request with the original key specified when starting the proxy
+
+```
+key=qwerty123
+```
+
+if key is wrong, or HTTP request is not POST metod, then returned nginx GONE page
+
+## Build
 
 installing dependencies
 
@@ -21,7 +56,13 @@ run it!
 ```
 ./zhban
 ```
-### Usage
+## Usage
+
+### cmd
+
+```
+./zhban -key qwerty123 -p 3002
+```
 
 **cmd args:**
 ```
@@ -36,6 +77,12 @@ run it!
   -utf8
         convert output data to utf8 encoding
   -v    Verbose output
+```
+
+### Docker
+
+```
+docker-compose up -d --build
 ```
 
 to run in production, use -key option for secure connections
