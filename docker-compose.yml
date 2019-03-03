@@ -1,8 +1,8 @@
-﻿version: '3'
+version: '3'
 services:
-    gozhban:
+    zhban:
       build: .
-      hostname: gozhban
+      hostname: zhban
       restart: always
       ports:
         - 3000:3000
