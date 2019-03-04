@@ -70,7 +70,7 @@ run it!
 You can use CURL to make test request:
 
 ```
-curl -d "url=http://ya.ru&key=123" -X POST http://127.0.0.1:3000
+curl -d "url=http://ya.ru&key=qwerty123" -X POST http://127.0.0.1:3002
 ```
 
 **cmd args:**
