@@ -5,7 +5,7 @@ lightweight http proxy
 [![Coverage Status](https://coveralls.io/repos/github/poloten4ik100/zhban/badge.svg?branch=master)](https://coveralls.io/github/poloten4ik100/zhban?branch=master)
 
 * Support http 1.1
-* Optional proxy Headers
+* Optional proxy Headers from client to destination
 * Automatic optional modification of response content encoding to utf8
 * Embedded browser headers with random User-Agent to remote host
 * key protected
@@ -13,13 +13,15 @@ lightweight http proxy
 ## How it works
 
 ```
-   +------+                                 +-----+               +-----------+
-   |client|                                 |proxy|               |destination|
-   +------+                                 +-----+               +-----------+
+   +------+                                 +-----+                     +-----------+
+   |client|                                 |proxy|                     |destination|
+   +------+                                 +-----+                     +-----------+
                      --Req-->       
              HTTP req. with POST data
-           url=http://ya.ru&key=qwqerty123             --Req-->
-                                                       <--Res--
+           url=http://ya.ru&key=qwqerty123                 --Req-->
+                                                       Random UA Header
+                                                        
+                                                           <--Res--
                      <--Res--
 ```
 
