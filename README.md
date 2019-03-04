@@ -67,6 +67,12 @@ run it!
 ./zhban -key qwerty123 -p 3002
 ```
 
+You can use CURL to make test request:
+
+```
+curl -d "url=http://ya.ru&key=123" -X POST http://127.0.0.1:3000
+```
+
 **cmd args:**
 ```
   -bh
