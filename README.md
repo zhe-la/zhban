@@ -4,41 +4,32 @@ lightweight HTTP proxy
 [![Build Status](https://travis-ci.com/poloten4ik100/zhban.svg?branch=master)](https://travis-ci.com/poloten4ik100/zhban)
 
 * Support HTTP 1.1
-* Optional proxy Headers from client to destination
-* Automatic optional modification of response content encoding to utf8
-* Embedded browser headers with random User-Agent to remote host
-* key protected
+* Optional proxying headers from client to destination without changes
+* Automatically transcode content response into utf8 encoding
+* Generate a random User-Agent header to the destination server
+* Key protection of requests
 
 ## How it works
 
 ```
    +------+                                 +-----+                     +-----------+
-   |client|                                 |proxy|                     |destination|
+   |client|                                 |zhban|                     |destination|
    +------+                                 +-----+                     +-----------+
                      --Req-->       
-             HTTP req. with POST data
-           url=http://ya.ru&key=qwqerty123                 --Req-->
+             HTTP req. with url header
+                                                           --Req-->
                                                        Random UA Header
                                                         
                                                            <--Res--
                      <--Res--
 ```
 
-client send HTTP request with POST data:
+1. Any client send HTTP request with **url** and **key**(optional) headers, containing **url** of destination target.
 
-```
-url=http://ya.ru
-```
+**url** - adress of destination target
 
-**url** - address of the requested resource
-
-**key** (optional) - The key that will be checked for each request with the original key specified when starting the proxy
-
-```
-key=qwerty123
-```
-
-if key is wrong, or HTTP request is not POST metod, then returned nginx GONE page
+**key** (optional) - a header containing a key that will be verified before proxying the connection
+if the key does not fit, page *nginx 410 Gone* will be given to the client
 
 ## Build
 
@@ -71,22 +62,28 @@ run it!
 You can use CURL to make test request:
 
 ```
-curl -d "url=http://ya.ru&key=qwerty123" -X POST http://127.0.0.1:3002
+curl --header "url: http://ya.ru" --header "key: qwerty123" http://127.0.0.1:3002
 ```
 
 **cmd args:**
 ```
   -bh
         Generate browser headers to final host. User-Agent Header is a random UA (default true)
+        
   -k string
-        Security key. If not set - insecure connection
+        Security key. If set, the request must contain the header "Key"
+        
   -p int
-        port for waiting connects with POST requests (default 3000)
+        Port for waiting connections (default 3000)
+        
   -ph
         Enable proxing headers to final host
-  -utf8
-        convert output data to utf8 encoding
-  -v    Verbose output
+        
+  -u
+        Convert response data to utf8 encoding
+        
+  -v    
+        Verbose output
 ```
 
 ### Docker
@@ -94,6 +91,3 @@ curl -d "url=http://ya.ru&key=qwerty123" -X POST http://127.0.0.1:3002
 ```
 docker-compose up -d --build
 ```
-
-to run in production, use -key option for secure connections
-
