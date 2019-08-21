@@ -24,9 +24,9 @@ lightweight HTTP proxy
                      <--Res--
 ```
 
-1. Any client send HTTP request with **url** and **key**(optional) headers, containing **url** of destination target.
+Any client send HTTP request to zhban with **url** and **key**(optional) headers, containing **url** of destination target.
 
-**url** - adress of destination target
+**url** - address of destination target
 
 **key** (optional) - a header containing a key that will be verified before proxying the connection
 if the key does not fit, page *nginx 410 Gone* will be given to the client
@@ -56,7 +56,7 @@ run it!
 ### cmd
 
 ```
-./zhban -key qwerty123 -p 3002
+./zhban -k qwerty123 -p 3002
 ```
 
 You can use CURL to make test request:
@@ -68,19 +68,19 @@ curl --header "url: http://ya.ru" --header "key: qwerty123" http://127.0.0.1:300
 **cmd args:**
 ```
   -bh
-        Generate browser headers to final host. User-Agent Header is a random UA (default true)
+        Generate browser headers with random User-Agent Header to destination host (default true)
         
   -k string
-        Security key. If set, the request must contain the header "Key"
+        Security key. If set, the request must contain the header "Key" (default none)
         
   -p int
         Port for waiting connections (default 3000)
         
   -ph
-        Enable proxing headers to final host
+        Enable proxing headers to destination host (default false)
         
   -u
-        Convert response data to utf8 encoding
+        Convert response data to utf8 encoding (default false)
         
   -v    
         Verbose output
