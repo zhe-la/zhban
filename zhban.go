@@ -1,4 +1,4 @@
-package zhban
+package main
 
 import (
 	"flag"
@@ -40,7 +40,7 @@ func rangeIn(low, hi int) string {
 func (clientData *ClientData) GetData(w http.ResponseWriter, r *http.Request) {
 	Reqid := rangeIn(10000, 99999) + " "
 	if clientData.settings.keyParamEnable {
-		key := r.Header.Get("Key")
+		key := r.Header.Get("key")
 		if key != clientData.settings.keyParam {
 			fmt.Println(Reqid + "Wrong key!")
 			w.Header().Set("Content-Type", "text/html; charset=utf-8")
@@ -50,7 +50,13 @@ func (clientData *ClientData) GetData(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	url := r.URL.String()
+	url := r.Header.Get("url")
+	if url == "" {
+		fmt.Println(Reqid + "empty url header")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		w.WriteHeader(nginxErrorCode)
+		fmt.Fprintf(w, nginxError)
+	}
 
 	if clientData.settings.verbose {
 		fmt.Println("\n" + Reqid + "NEW Request")

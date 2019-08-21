@@ -1,4 +1,4 @@
-package zhban
+package main
 
 import (
 	"io"
@@ -25,12 +25,13 @@ func TestBroweserHeadersData(t *testing.T) {
 	/*
 	   check headers (bh not set)
 	*/
-	req, err := http.NewRequest("GET", ts.URL, nil)
+	req, err := http.NewRequest("GET", "http://ya.ru/12", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-	req.Header.Add("Key", key)
+	req.Header.Add("key", key)
+	req.Header.Add("url", ts.URL)
 
 	handler := http.HandlerFunc(clientData.GetData)
 
@@ -58,12 +59,13 @@ func TestBroweserHeadersData(t *testing.T) {
 		settings: Settings{keyParamEnable: true, keyParam: "right_key", browserHeadersGen: true},
 	}
 
-	req, err = http.NewRequest("GET", ts.URL, nil)
+	req, err = http.NewRequest("GET", "http://ya.ru/123", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-	req.Header.Add("Key", key)
+	req.Header.Add("key", key)
+	req.Header.Add("url", ts.URL)
 
 	handler = http.HandlerFunc(clientData.GetData)
 
@@ -102,7 +104,8 @@ func TestKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-	req.Header.Add("Key", key)
+	req.Header.Add("key", key)
+	req.Header.Add("url", "http://ya.ru/123")
 
 	handler := http.HandlerFunc(clientData.GetData)
 
@@ -133,7 +136,8 @@ func TestKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-	req.Header.Add("Key", key)
+	req.Header.Add("key", key)
+	req.Header.Add("url", "http://ya.ru/123")
 
 	handler = http.HandlerFunc(clientData.GetData)
 
