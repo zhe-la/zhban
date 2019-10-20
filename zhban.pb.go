@@ -24,34 +24,6 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type HealthCheckResponse_ServingStatus int32
-
-const (
-	HealthCheckResponse_UNKNOWN     HealthCheckResponse_ServingStatus = 0
-	HealthCheckResponse_SERVING     HealthCheckResponse_ServingStatus = 1
-	HealthCheckResponse_NOT_SERVING HealthCheckResponse_ServingStatus = 2
-)
-
-var HealthCheckResponse_ServingStatus_name = map[int32]string{
-	0: "UNKNOWN",
-	1: "SERVING",
-	2: "NOT_SERVING",
-}
-
-var HealthCheckResponse_ServingStatus_value = map[string]int32{
-	"UNKNOWN":     0,
-	"SERVING":     1,
-	"NOT_SERVING": 2,
-}
-
-func (x HealthCheckResponse_ServingStatus) String() string {
-	return proto.EnumName(HealthCheckResponse_ServingStatus_name, int32(x))
-}
-
-func (HealthCheckResponse_ServingStatus) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_667de6062ce961f1, []int{3, 0}
-}
-
 type DataRequestKey struct {
 	Key                  string   `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	Url                  string   `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
@@ -146,117 +118,26 @@ func (m *DataResponse) GetStatusCode() int64 {
 	return 0
 }
 
-//health-checks
-type HealthCheckRequest struct {
-	Service              string   `protobuf:"bytes,1,opt,name=service,proto3" json:"service,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *HealthCheckRequest) Reset()         { *m = HealthCheckRequest{} }
-func (m *HealthCheckRequest) String() string { return proto.CompactTextString(m) }
-func (*HealthCheckRequest) ProtoMessage()    {}
-func (*HealthCheckRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_667de6062ce961f1, []int{2}
-}
-
-func (m *HealthCheckRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_HealthCheckRequest.Unmarshal(m, b)
-}
-func (m *HealthCheckRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_HealthCheckRequest.Marshal(b, m, deterministic)
-}
-func (m *HealthCheckRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_HealthCheckRequest.Merge(m, src)
-}
-func (m *HealthCheckRequest) XXX_Size() int {
-	return xxx_messageInfo_HealthCheckRequest.Size(m)
-}
-func (m *HealthCheckRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_HealthCheckRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_HealthCheckRequest proto.InternalMessageInfo
-
-func (m *HealthCheckRequest) GetService() string {
-	if m != nil {
-		return m.Service
-	}
-	return ""
-}
-
-type HealthCheckResponse struct {
-	Status               HealthCheckResponse_ServingStatus `protobuf:"varint,1,opt,name=status,proto3,enum=main.HealthCheckResponse_ServingStatus" json:"status,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                          `json:"-"`
-	XXX_unrecognized     []byte                            `json:"-"`
-	XXX_sizecache        int32                             `json:"-"`
-}
-
-func (m *HealthCheckResponse) Reset()         { *m = HealthCheckResponse{} }
-func (m *HealthCheckResponse) String() string { return proto.CompactTextString(m) }
-func (*HealthCheckResponse) ProtoMessage()    {}
-func (*HealthCheckResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_667de6062ce961f1, []int{3}
-}
-
-func (m *HealthCheckResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_HealthCheckResponse.Unmarshal(m, b)
-}
-func (m *HealthCheckResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_HealthCheckResponse.Marshal(b, m, deterministic)
-}
-func (m *HealthCheckResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_HealthCheckResponse.Merge(m, src)
-}
-func (m *HealthCheckResponse) XXX_Size() int {
-	return xxx_messageInfo_HealthCheckResponse.Size(m)
-}
-func (m *HealthCheckResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_HealthCheckResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_HealthCheckResponse proto.InternalMessageInfo
-
-func (m *HealthCheckResponse) GetStatus() HealthCheckResponse_ServingStatus {
-	if m != nil {
-		return m.Status
-	}
-	return HealthCheckResponse_UNKNOWN
-}
-
 func init() {
-	proto.RegisterEnum("main.HealthCheckResponse_ServingStatus", HealthCheckResponse_ServingStatus_name, HealthCheckResponse_ServingStatus_value)
 	proto.RegisterType((*DataRequestKey)(nil), "main.DataRequestKey")
 	proto.RegisterType((*DataResponse)(nil), "main.DataResponse")
-	proto.RegisterType((*HealthCheckRequest)(nil), "main.HealthCheckRequest")
-	proto.RegisterType((*HealthCheckResponse)(nil), "main.HealthCheckResponse")
 }
 
 func init() { proto.RegisterFile("zhban.proto", fileDescriptor_667de6062ce961f1) }
 
 var fileDescriptor_667de6062ce961f1 = []byte{
-	// 316 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x92, 0xcd, 0x4a, 0xc3, 0x40,
-	0x14, 0x85, 0x3b, 0xfd, 0xc5, 0x5b, 0xad, 0xe1, 0xea, 0x22, 0x76, 0x21, 0x32, 0x1b, 0x5d, 0x05,
-	0x89, 0x2e, 0x44, 0x44, 0xd1, 0x2a, 0x55, 0x0a, 0x29, 0x24, 0x6a, 0xc1, 0x8d, 0x4c, 0xd3, 0xc1,
-	0x94, 0xc6, 0xa4, 0x66, 0x26, 0x42, 0x7d, 0x00, 0x1f, 0xc0, 0x27, 0x96, 0x99, 0x49, 0xa1, 0x81,
-	0xba, 0x71, 0x37, 0x73, 0x72, 0xbf, 0x93, 0x73, 0x0f, 0x03, 0xed, 0xaf, 0x68, 0xcc, 0x12, 0x67,
-	0x9e, 0xa5, 0x32, 0xc5, 0xfa, 0x3b, 0x9b, 0x26, 0xf4, 0x14, 0x3a, 0xb7, 0x4c, 0x32, 0x9f, 0x7f,
-	0xe4, 0x5c, 0xc8, 0x01, 0x5f, 0xa0, 0x05, 0xb5, 0x19, 0x5f, 0xd8, 0xe4, 0x80, 0x1c, 0x6d, 0xf8,
-	0xea, 0xa8, 0x94, 0x3c, 0x8b, 0xed, 0xaa, 0x51, 0xf2, 0x2c, 0xa6, 0x37, 0xb0, 0x69, 0x28, 0x31,
-	0x4f, 0x13, 0xc1, 0x11, 0xa1, 0x3e, 0x61, 0x92, 0x15, 0x90, 0x3e, 0xe3, 0x3e, 0x80, 0x90, 0x4c,
-	0xe6, 0xa2, 0x97, 0x4e, 0xb8, 0x86, 0x6b, 0xfe, 0x8a, 0x42, 0x1d, 0xc0, 0x7b, 0xce, 0x62, 0x19,
-	0xf5, 0x22, 0x1e, 0xce, 0x8a, 0x00, 0x68, 0x43, 0x4b, 0xf0, 0xec, 0x73, 0x1a, 0xf2, 0xc2, 0x6c,
-	0x79, 0xa5, 0x3f, 0x04, 0x76, 0x4a, 0x40, 0xf1, 0xef, 0x2b, 0x68, 0x1a, 0x57, 0x0d, 0x74, 0xdc,
-	0x43, 0x47, 0x2d, 0xe6, 0xac, 0x19, 0x75, 0x02, 0x65, 0x95, 0xbc, 0x05, 0x7a, 0xdc, 0x2f, 0x30,
-	0x7a, 0x0e, 0x5b, 0xa5, 0x0f, 0xd8, 0x86, 0xd6, 0x93, 0x37, 0xf0, 0x86, 0x23, 0xcf, 0xaa, 0xa8,
-	0x4b, 0x70, 0xe7, 0x3f, 0x3f, 0x78, 0x7d, 0x8b, 0xe0, 0x36, 0xb4, 0xbd, 0xe1, 0xe3, 0xeb, 0x52,
-	0xa8, 0xba, 0xd7, 0xd0, 0x78, 0x51, 0x9d, 0xe2, 0x19, 0x40, 0x9f, 0x4b, 0x55, 0x8a, 0xea, 0x70,
-	0xd7, 0x64, 0x28, 0x37, 0xdb, 0xc5, 0x55, 0xd5, 0x44, 0xa2, 0x15, 0xf7, 0x9b, 0x40, 0xd3, 0x84,
-	0xc5, 0x0b, 0x68, 0xe8, 0xc0, 0x68, 0xaf, 0xd9, 0x41, 0xdb, 0x74, 0xf7, 0xfe, 0xdc, 0x0e, 0x2f,
-	0xa1, 0x31, 0x62, 0x32, 0x8c, 0xfe, 0x45, 0x1f, 0x93, 0x71, 0x53, 0xbf, 0x8b, 0x93, 0xdf, 0x00,
-	0x00, 0x00, 0xff, 0xff, 0xed, 0xd3, 0xff, 0xbd, 0x26, 0x02, 0x00, 0x00,
+	// 172 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xae, 0xca, 0x48, 0x4a,
+	0xcc, 0xd3, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0xc9, 0x4d, 0xcc, 0xcc, 0x53, 0x32, 0xe1,
+	0xe2, 0x73, 0x49, 0x2c, 0x49, 0x0c, 0x4a, 0x2d, 0x2c, 0x4d, 0x2d, 0x2e, 0xf1, 0x4e, 0xad, 0x14,
+	0x12, 0xe0, 0x62, 0xce, 0x4e, 0xad, 0x94, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x0c, 0x02, 0x31, 0x41,
+	0x22, 0xa5, 0x45, 0x39, 0x12, 0x4c, 0x10, 0x91, 0xd2, 0xa2, 0x1c, 0x25, 0x27, 0x2e, 0x1e, 0x88,
+	0xae, 0xe2, 0x82, 0xfc, 0xbc, 0xe2, 0x54, 0x21, 0x21, 0x2e, 0x96, 0x94, 0xc4, 0x92, 0x44, 0xa8,
+	0x26, 0x30, 0x5b, 0x48, 0x8e, 0x8b, 0xab, 0xb8, 0x24, 0xb1, 0xa4, 0xb4, 0xd8, 0x39, 0x3f, 0x25,
+	0x15, 0xac, 0x99, 0x39, 0x08, 0x49, 0xc4, 0xc8, 0x91, 0x8b, 0x35, 0x0a, 0xe4, 0x1c, 0x21, 0x0b,
+	0x2e, 0x2e, 0xf7, 0xd4, 0x12, 0x90, 0x79, 0x20, 0xeb, 0x45, 0xf4, 0x40, 0xee, 0xd2, 0x43, 0x75,
+	0x94, 0x94, 0x10, 0xb2, 0x28, 0xc4, 0x52, 0x25, 0x86, 0x24, 0x36, 0xb0, 0x4f, 0x8c, 0x01, 0x01,
+	0x00, 0x00, 0xff, 0xff, 0xce, 0xbe, 0x92, 0xd8, 0xd8, 0x00, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -336,141 +217,5 @@ var _Zhban_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "zhban.proto",
-}
-
-// HealthClient is the client API for Health service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type HealthClient interface {
-	Check(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error)
-	Watch(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (Health_WatchClient, error)
-}
-
-type healthClient struct {
-	cc *grpc.ClientConn
-}
-
-func NewHealthClient(cc *grpc.ClientConn) HealthClient {
-	return &healthClient{cc}
-}
-
-func (c *healthClient) Check(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error) {
-	out := new(HealthCheckResponse)
-	err := c.cc.Invoke(ctx, "/main.Health/Check", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *healthClient) Watch(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (Health_WatchClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_Health_serviceDesc.Streams[0], "/main.Health/Watch", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &healthWatchClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Health_WatchClient interface {
-	Recv() (*HealthCheckResponse, error)
-	grpc.ClientStream
-}
-
-type healthWatchClient struct {
-	grpc.ClientStream
-}
-
-func (x *healthWatchClient) Recv() (*HealthCheckResponse, error) {
-	m := new(HealthCheckResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-// HealthServer is the server API for Health service.
-type HealthServer interface {
-	Check(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
-	Watch(*HealthCheckRequest, Health_WatchServer) error
-}
-
-// UnimplementedHealthServer can be embedded to have forward compatible implementations.
-type UnimplementedHealthServer struct {
-}
-
-func (*UnimplementedHealthServer) Check(ctx context.Context, req *HealthCheckRequest) (*HealthCheckResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Check not implemented")
-}
-func (*UnimplementedHealthServer) Watch(req *HealthCheckRequest, srv Health_WatchServer) error {
-	return status.Errorf(codes.Unimplemented, "method Watch not implemented")
-}
-
-func RegisterHealthServer(s *grpc.Server, srv HealthServer) {
-	s.RegisterService(&_Health_serviceDesc, srv)
-}
-
-func _Health_Check_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HealthCheckRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HealthServer).Check(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/main.Health/Check",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HealthServer).Check(ctx, req.(*HealthCheckRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Health_Watch_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(HealthCheckRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(HealthServer).Watch(m, &healthWatchServer{stream})
-}
-
-type Health_WatchServer interface {
-	Send(*HealthCheckResponse) error
-	grpc.ServerStream
-}
-
-type healthWatchServer struct {
-	grpc.ServerStream
-}
-
-func (x *healthWatchServer) Send(m *HealthCheckResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-var _Health_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "main.Health",
-	HandlerType: (*HealthServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Check",
-			Handler:    _Health_Check_Handler,
-		},
-	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "Watch",
-			Handler:       _Health_Watch_Handler,
-			ServerStreams: true,
-		},
-	},
 	Metadata: "zhban.proto",
 }
