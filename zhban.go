@@ -239,7 +239,7 @@ func main() {
 	flag.BoolVar(&clientData.settings.toUtf8, "u", false, "Convert response data to utf8 encoding")
 	flag.StringVar(&clientData.settings.keyParam, "k", "", "Security key. If set, the request must contain the header \"Key\"")
 	flag.StringVar(&clientData.settings.bindhost, "bind", "", "Address for listen (example: 127.0.0.1)")
-	flag.IntVar(&clientData.settings.bindport, "p", 3000, "HTTP port for client connections")
+	flag.IntVar(&clientData.settings.bindport, "http", 3000, "HTTP port for client connections")
 	flag.Parse()
 
 	// show options
