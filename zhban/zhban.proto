@@ -2,7 +2,7 @@ syntax = "proto3";
 
 // protoc --go_out=plugins=grpc:. zhban.proto
 
-package main;
+package zhban;
 
 message DataRequestKey {
     string key = 1;
