@@ -28,7 +28,7 @@ lightweight HTTP proxy
                      <--Res--
 ```
 
-Any client send HTTP request to zhban with **url** and **key**(optional) headers, containing **url** of destination target.
+Any client send HTTP request to zhban with **url** and **key**(optional) headers (or gRPC request with key+url), containing **url** of destination target.
 
 **url** - address of destination target
 
@@ -49,7 +49,7 @@ go get github.com/hashicorp/consul/api
 to build binary file, use:
 
 ```
-go build zhban.go
+go build
 ```
 
 run it!
@@ -73,19 +73,19 @@ curl --header "url: http://ya.ru" --header "key: qwerty123" http://127.0.0.1:300
 
 ### Other use cases:
 
-You can also enable the zban proxy server for gRPC clients on the port 4000
+You can also enable the zban proxy server for listen gRPC clients on the port 4000
 
 ```
 ./zhban -k qwerty123 -grpc 4000
 ```
 
-Enable the zban proxy server for HTTP clients on the port 3002 and enable automatic registration / exit / health check of the service in the consul
+Enable the zban proxy server for listen HTTP clients on the port 3002 and enable automatic registration / exit / health check of the service in the consul
 
 ```
 ./zhban -k qwerty123 -http 3002 -consul 127.0.0.1:8500
 ```
 
-Enable the zban proxy server for gRPC clients on the port 4000 and enable automatic registration / exit / health check of the service in the consul
+Enable the zban proxy server for listen gRPC clients on the port 4000 and enable automatic registration / exit / health check of the service in the consul
 
 ```
 ./zhban -k qwerty123 -grpc 4000 -consul 127.0.0.1:8500
