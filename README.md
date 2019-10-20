@@ -4,7 +4,9 @@ lightweight HTTP proxy
 [![Build Status](https://travis-ci.com/poloten4ik100/zhban.svg?branch=master)](https://travis-ci.com/poloten4ik100/zhban)
 
 * Support HTTP 1.1
-* Optional proxying headers from client to destination without changes
+* Support HTTP or gRPC clients
+* Option registration / exit / health check in consul
+* Optional proxying headers from client to destination without changes for HTTP clients
 * Automatically transcode content response into utf8 encoding
 * Generate a random User-Agent header to the destination server
 * Key protection of requests
@@ -16,7 +18,9 @@ lightweight HTTP proxy
    |client|                                 |zhban|                     |destination|
    +------+                                 +-----+                     +-----------+
                      --Req-->       
-             HTTP req. with url header
+    HTTP req. with url (and, optional, key) header
+                        or
+             gRPC request with key+url
                                                            --Req-->
                                                        Random UA Header
                                                         
