@@ -59,12 +59,10 @@ run it!
 ```
 ## Usage
 
-### cmd
-
 enable zban proxy server for HTTP clients on the port 3002
 
 ```
-./zhban -k qwerty123 -p 3002
+./zhban -k qwerty123 -http 3002
 ```
 
 You can use CURL to make test HTTP request:
@@ -73,7 +71,7 @@ You can use CURL to make test HTTP request:
 curl --header "url: http://ya.ru" --header "key: qwerty123" http://127.0.0.1:3002
 ```
 
-Other use cases:
+### Other use cases:
 
 You can also enable the zban proxy server for gRPC clients on the port 4000
 
@@ -84,7 +82,7 @@ You can also enable the zban proxy server for gRPC clients on the port 4000
 Enable the zban proxy server for HTTP clients on the port 3002 and enable automatic registration / exit / health check of the service in the consul
 
 ```
-./zhban -k qwerty123 -p 3002 -consul 127.0.0.1:8500
+./zhban -k qwerty123 -http 3002 -consul 127.0.0.1:8500
 ```
 
 Enable the zban proxy server for gRPC clients on the port 4000 and enable automatic registration / exit / health check of the service in the consul
