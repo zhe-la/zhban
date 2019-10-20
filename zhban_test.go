@@ -1,9 +1,11 @@
 package main
 
 import (
+	"context"
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
@@ -33,7 +35,7 @@ func TestBroweserHeadersData(t *testing.T) {
 	req.Header.Add("key", key)
 	req.Header.Add("url", ts.URL)
 
-	handler := http.HandlerFunc(clientData.GetData)
+	handler := http.HandlerFunc(clientData.Process)
 
 	rr := httptest.NewRecorder()
 	handler.ServeHTTP(rr, req)
@@ -67,7 +69,7 @@ func TestBroweserHeadersData(t *testing.T) {
 	req.Header.Add("key", key)
 	req.Header.Add("url", ts.URL)
 
-	handler = http.HandlerFunc(clientData.GetData)
+	handler = http.HandlerFunc(clientData.Process)
 
 	rr = httptest.NewRecorder()
 	handler.ServeHTTP(rr, req)
@@ -107,7 +109,7 @@ func TestKey(t *testing.T) {
 	req.Header.Add("key", key)
 	req.Header.Add("url", "http://ya.ru/123")
 
-	handler := http.HandlerFunc(clientData.GetData)
+	handler := http.HandlerFunc(clientData.Process)
 
 	rr := httptest.NewRecorder()
 	handler.ServeHTTP(rr, req)
@@ -139,7 +141,7 @@ func TestKey(t *testing.T) {
 	req.Header.Add("key", key)
 	req.Header.Add("url", "http://ya.ru/123")
 
-	handler = http.HandlerFunc(clientData.GetData)
+	handler = http.HandlerFunc(clientData.Process)
 
 	rr = httptest.NewRecorder()
 	handler.ServeHTTP(rr, req)
@@ -149,5 +151,31 @@ func TestKey(t *testing.T) {
 	if status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			status, http.StatusOK)
+	}
+}
+
+func TestGRPCWithAUTH(t *testing.T) {
+	want := "yandex.ru"
+	clientData := &ClientData{
+		settings: Settings{keyParamEnable: true, keyParam: "right_key"},
+	}
+	req := &DataRequestKey{Key: "right_key", Url: "http://yandex.ru"}
+	resp, err := clientData.GetDataKey(context.Background(), req)
+	if err != nil {
+		t.Errorf("got unexpected error")
+	}
+	if !strings.Contains(resp.Data, want) {
+		t.Errorf("got %v want %v", resp.Data, want)
+	}
+}
+
+func TestGRPCKey(t *testing.T) {
+	clientData := &ClientData{
+		settings: Settings{keyParamEnable: true, keyParam: "right_key"},
+	}
+	req := &DataRequestKey{Key: "wrong_key", Url: "http://yandex.ru"}
+	_, err := clientData.GetDataKey(context.Background(), req)
+	if err == nil {
+		t.Errorf("got unexpected error")
 	}
 }
