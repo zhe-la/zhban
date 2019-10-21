@@ -50,11 +50,6 @@ type Settings struct {
 	keyParamEnable    bool
 }
 
-type kostylError struct {
-	err      string
-	httpCode string
-}
-
 // Health struct
 type Health struct{}
 
@@ -90,6 +85,7 @@ func (clientData *ClientData) GetDataKey(ctx context.Context, in *zhban.DataRequ
 	return &zhban.DataResponse{Data: string(body)}, nil
 }
 
+// getFromRemote отправляет запрос на удаленный http-сервер
 func (clientData *ClientData) getFromRemote(reqid string, url string, headers http.Header) ([]byte, error) {
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
@@ -217,7 +213,6 @@ func isFlagPassed(name string) bool {
 }
 
 func main() {
-
 	transport := &http.Transport{
 		MaxIdleConns:        10,
 		IdleConnTimeout:     30 * time.Second,
