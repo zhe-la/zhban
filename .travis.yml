@@ -1,5 +1,6 @@
 language: go
 go:
  - "1.13"
-before_script: cd zhban_server
-script: go test -v ./...
+script: 
+ - cd zhban_server
+ - go test -v ./...
