@@ -22,7 +22,7 @@ lightweight HTTP proxy
                         or
              gRPC request with key+url
                                                            --Req-->
-                                                       Random UA Header
+                                                HTTP req. with random UA Header
                                                         
                                                            <--Res--
                      <--Res--
@@ -35,6 +35,8 @@ Any client send HTTP request to zhban with **url** and **key**(optional) headers
 **key** (optional) - a header containing a key that will be verified before proxying the connection
 if the key does not fit, page *nginx 410 Gone* will be given to the client
 
+then zhban sends an HTTP request to the destination host, receives a response, and sends it back to the client
+
 ## Build
 
 installing dependencies
@@ -44,12 +46,13 @@ go get golang.org/x/net/html/charset
 go get github.com/corpix/uarand
 go get google.golang.org/grpc
 go get github.com/hashicorp/consul/api
+go get github.com/poloten4ik100/zhban/api
 ```
 
 to build binary file, use:
 
 ```
-go build
+go build zhban_server/zhban.go
 ```
 
 run it!
@@ -89,6 +92,20 @@ Enable the zban proxy server for listen gRPC clients on the port 4000 and enable
 
 ```
 ./zhban -k qwerty123 -grpc 4000 -consul 127.0.0.1:8500
+```
+
+You can use the client to test gRPC requests to zhban
+
+build client
+
+```
+go build zhban_client\client.go
+```
+
+run it
+
+```
+client -k qwerty123 -addr 127.0.0.1:4000 -url http://ya.ru
 ```
 
 **cmd args:**
