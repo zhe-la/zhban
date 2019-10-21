@@ -2,11 +2,12 @@
 package main
 
 import (
-	"api"
 	"context"
 	"flag"
 	"fmt"
 	"time"
+
+	"github.com/poloten4ik100/zhban/api"
 
 	"google.golang.org/grpc"
 )
