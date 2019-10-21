@@ -1,6 +1,7 @@
 package main
 
 import (
+	zhbanAPI "api"
 	"context"
 	"errors"
 	"flag"
@@ -16,7 +17,6 @@ import (
 	"sync"
 	"syscall"
 	"time"
-	zhbanAPI "zhban/api"
 
 	"github.com/corpix/uarand"
 	"github.com/hashicorp/consul/api"

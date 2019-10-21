@@ -1,13 +1,13 @@
 package main
 
 import (
+	zhbanAPI "api"
 	"context"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
-	zhbanAPI "zhban/api"
 )
 
 func ServerTestRequests(w http.ResponseWriter, r *http.Request) {
