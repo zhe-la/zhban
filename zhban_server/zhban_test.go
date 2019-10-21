@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
-	"zhban/zhban"
+	zhbanAPI "zhban/api"
 )
 
 func ServerTestRequests(w http.ResponseWriter, r *http.Request) {
@@ -160,7 +160,7 @@ func TestGRPCWithAUTH(t *testing.T) {
 	clientData := &ClientData{
 		settings: Settings{keyParamEnable: true, keyParam: "right_key"},
 	}
-	req := &zhban.DataRequestKey{Key: "right_key", Url: "http://yandex.ru"}
+	req := &zhbanAPI.DataRequestKey{Key: "right_key", Url: "http://yandex.ru"}
 	resp, err := clientData.GetDataKey(context.Background(), req)
 	if err != nil {
 		t.Errorf("got unexpected error")
@@ -174,7 +174,7 @@ func TestGRPCKey(t *testing.T) {
 	clientData := &ClientData{
 		settings: Settings{keyParamEnable: true, keyParam: "right_key"},
 	}
-	req := &zhban.DataRequestKey{Key: "wrong_key", Url: "http://yandex.ru"}
+	req := &zhbanAPI.DataRequestKey{Key: "wrong_key", Url: "http://yandex.ru"}
 	_, err := clientData.GetDataKey(context.Background(), req)
 	if err == nil {
 		t.Errorf("got unexpected error")

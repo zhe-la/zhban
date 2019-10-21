@@ -6,7 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"time"
-	"zhban/zhban"
+	"zhban/api"
 
 	"google.golang.org/grpc"
 )
@@ -24,11 +24,11 @@ func main() {
 		fmt.Println("did not connect", err)
 	}
 	defer conn.Close()
-	c := zhban.NewZhbanClient(conn)
+	c := api.NewZhbanClient(conn)
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*3)
 	defer cancel()
-	r, err := c.GetDataKey(ctx, &zhban.DataRequestKey{Key: key, Url: url})
+	r, err := c.GetDataKey(ctx, &api.DataRequestKey{Key: key, Url: url})
 	if err != nil {
 		fmt.Println("Request error", err)
 	}

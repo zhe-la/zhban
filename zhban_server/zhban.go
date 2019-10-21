@@ -16,7 +16,7 @@ import (
 	"sync"
 	"syscall"
 	"time"
-	"zhban/zhban"
+	zhbanAPI "zhban/api"
 
 	"github.com/corpix/uarand"
 	"github.com/hashicorp/consul/api"
@@ -76,13 +76,13 @@ func (clientData *ClientData) myUnaryInterceptor(ctx context.Context, req interf
 }
 
 // GetDataKey Запрос с авторизацией
-func (clientData *ClientData) GetDataKey(ctx context.Context, in *zhban.DataRequestKey) (out *zhban.DataResponse, err error) {
+func (clientData *ClientData) GetDataKey(ctx context.Context, in *zhbanAPI.DataRequestKey) (out *zhbanAPI.DataResponse, err error) {
 	reqid := rangeIn(10000, 99999)
 	if in.GetKey() != clientData.settings.keyParam {
 		return nil, errors.New("Wrong key")
 	}
 	body, err := clientData.getFromRemote(reqid, in.GetUrl(), nil)
-	return &zhban.DataResponse{Data: string(body)}, nil
+	return &zhbanAPI.DataResponse{Data: string(body)}, nil
 }
 
 // getFromRemote отправляет запрос на удаленный http-сервер
@@ -339,7 +339,7 @@ func main() {
 		clientData.grpcServer = grpc.NewServer(
 			grpc.UnaryInterceptor(clientData.myUnaryInterceptor),
 		)
-		zhban.RegisterZhbanServer(clientData.grpcServer, clientData)
+		zhbanAPI.RegisterZhbanServer(clientData.grpcServer, clientData)
 		grpc_health_v1.RegisterHealthServer(clientData.grpcServer, &Health{})
 		clientData.grpcServer.Serve(lis)
 		fmt.Println("Server Stoped")
