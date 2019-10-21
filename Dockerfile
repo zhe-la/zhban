@@ -13,4 +13,4 @@ RUN rm Dockerfile && rm docker-compose.yml && rm zhban_server/zhban.go && rm zhb
 FROM alpine:latest as prod-env
 COPY --from=build-env /root/zhban/zhban ./
 EXPOSE 3000/tcp
-CMD ["./zhban_server", "-http", "3000"]
+CMD ["./zhban", "-http", "3000"]
